@@ -177,7 +177,10 @@
 
 $(document).ready(function () {
 	$('body').on('mouseenter', '.select2-results__option.non-leaf span.item-label', function (e) {
-
+		if (!e) return;
+		if (!e.currentTarget) return;
+		if (!e.currentTarget.parentNode) return;
+		if (!e.fromElement) return;
 		// console.log(e.currentTarget);
 		
 		if (!e.currentTarget.parentNode.classList.contains("opened") && !e.fromElement.classList.contains("expand-collapse")) {
