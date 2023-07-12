@@ -3,7 +3,6 @@
  * https://github.com/clivezhg/select2-to-tree
  */
 (function ($) {
-
 	$.fn.select2ToTree = function (options) {
 		var opts = $.extend({}, options);
 
@@ -33,8 +32,6 @@
 		};
 
 		window.expColMouseupHandler = function (evt) {
-			console.log(evt.target || evt.srcElement);
-
 			toggleSubOptions(evt.target || evt.srcElement);
 			/* prevent Select2 from doing "select2:selecting","select2:unselecting","select2:closing" */
 			evt.stopPropagation ? evt.stopPropagation() : evt.cancelBubble = true;
@@ -43,22 +40,17 @@
 
 		var s2inst = this.select2(opts);
 
-		var openFunc = function (evt) {
-
-
+		s2inst.on("select2:open", function (evt) {
 			var s2data = s2inst.data("select2");
 			s2data.$dropdown.addClass("s2-to-tree");
 			s2data.$dropdown.removeClass("searching-result");
-			var $allsch = s2data.$dropdown.find(".select2-search__field").add(s2data.$container.find(".select2-search__field"));
+			var $allsch = s2data.$dropdown.find(".select2-search__field").add( s2data.$container.find(".select2-search__field") );
 			$allsch.off("input", inputHandler);
 			$allsch.on("input", inputHandler);
-		}
-
-		s2inst.on("select2:open", openFunc);
+		});
 
 		/* Show search result options even if they are collapsed */
 		function inputHandler(evt) {
-
 			var s2data = s2inst.data("select2");
 			if ($(this).val().trim().length > 0) {
 				s2data.$dropdown.addClass("searching-result");
@@ -68,12 +60,10 @@
 			}
 		}
 
-		window.inputHandler = inputHandler;
-
 		return s2inst;
 	};
 
-	/* Build the Select Option elements */
+ 	/* Build the Select Option elements */
 	function buildSelect(treeData, $el) {
 
 		/* Support the object path (eg: `item.label`) for 'valFld' & 'labelFld' */
@@ -92,7 +82,7 @@
 
 		function buildOptions(dataArr, curLevel, pup) {
 			var labelPath;
-			if (treeData.labelFld && treeData.labelFld.split('.').length > 1) {
+			if (treeData.labelFld && treeData.labelFld.split('.').length> 1){
 				labelPath = treeData.labelFld.split('.');
 			}
 			var idPath;
@@ -116,7 +106,7 @@
 				if (data[treeData.selFld || "selected"] && String(data[treeData.selFld || "selected"]) === "true") {
 					$opt.prop("selected", data[treeData.selFld || "selected"]);
 				}
-				if ($opt.val() === "") {
+				if($opt.val() === "") {
 					$opt.prop("disabled", true);
 					$opt.val(getUniqueValue());
 				}
@@ -126,7 +116,7 @@
 				var inc = data[treeData.incFld || "inc"];
 				if (inc && inc.length > 0) {
 					$opt.addClass("non-leaf");
-					buildOptions(inc, curLevel + 1, $opt.val());
+					buildOptions(inc, curLevel+1, $opt.val());
 				}
 			} // end 'for'
 		} // end 'buildOptions'
@@ -172,19 +162,3 @@
 		});
 	}
 })(jQuery);
-
-
-
-$(document).ready(function () {
-	$('body').on('mouseenter', '.select2-results__option.non-leaf span.item-label', function (e) {
-
-		console.log(e.currentTarget);
-		
-		if (!e.currentTarget.parentNode.classList.contains("opened") && !e.fromElement.classList.contains("expand-collapse")) {
-			console.log(e);
-			expColMouseupHandler(e)
-		}
-
-
-	});
-});
