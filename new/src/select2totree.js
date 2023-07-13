@@ -203,17 +203,17 @@ $(document).ready(function () {
 	// });
 
 	document.body.addEventListener("pointermove", function (e) {	
-		console.log(e);
+		// console.log(e);
 
 		if (!e) return;
 		// console.log(e.currentTarget);
 		var ele = document.elementFromPoint(e.clientX, e.clientY);
-		console.log(ele);
+		// console.log(ele);
 		
 		if (ele.classList.contains("item-label") && (
 			!ele.parentNode.classList.contains("opened")
 		)) {
-			console.log(ele);
+			// console.log(ele);
 			
 			expColMouseupHandlerNoPrevent(ele)
 			//console.log(ele);
