@@ -156,10 +156,11 @@
 
 /* "+" and "-" to the right */
 
-li.select2-results__option, li.select2-results__option>* {
+li.select2-results__option, li.select2-results__option>*, .select2 {
 	touch-action: none;
 }
 
 .s2-to-tree .item-label {
 	width: unset;
 }
+
