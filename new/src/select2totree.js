@@ -26,9 +26,12 @@
 					container.setAttribute("data-pup", ele.getAttribute("data-pup"));
 				}
 				if ($(container).hasClass("non-leaf")) {
-					return $.merge($('<span class="expand-collapse" onmouseup="expColMouseupHandler(event);"></span>'), $iteme);
+					return $.merge($iteme, $('<span class="expand-collapse" onmouseup="expColMouseupHandler(event);"></span>'));
 				}
+
+
 			}
+
 			return $iteme;
 		};
 
@@ -39,6 +42,12 @@
 			/* prevent Select2 from doing "select2:selecting","select2:unselecting","select2:closing" */
 			evt.stopPropagation ? evt.stopPropagation() : evt.cancelBubble = true;
 			evt.preventDefault ? evt.preventDefault() : evt.returnValue = false;
+		}
+
+		window.expColMouseupHandlerNoPrevent = function (target) {
+			// console.log(evt.target || evt.srcElement);
+
+			toggleSubOptions(target);
 		}
 
 		var s2inst = this.select2(opts);
@@ -182,12 +191,36 @@ $(document).ready(function () {
 		if (!e.currentTarget.parentNode) return;
 		if (!e.fromElement) return;
 		// console.log(e.currentTarget);
-		
+
 		if (!e.currentTarget.parentNode.classList.contains("opened") && !e.fromElement.classList.contains("expand-collapse")) {
 			// console.log(e);
 			expColMouseupHandler(e)
+			// console.log(e.target);
+			
 		}
 
 
 	});
+
+	document.body.addEventListener("touchmove", function (e) {
+
+		if (!e || !e.touches[0]) return;
+		// console.log(e.currentTarget);
+		var ele = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
+
+		if (ele.classList.contains("item-label") && (
+			!ele.parentNode.classList.contains("opened")
+		)) {
+			
+			expColMouseupHandlerNoPrevent(ele)
+			//console.log(ele);
+			
+		}
+
+
+
+	})
+
+		
+		
 });
