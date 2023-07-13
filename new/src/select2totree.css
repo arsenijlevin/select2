@@ -156,7 +156,7 @@
 
 /* "+" and "-" to the right */
 
-li.select2-results__option, li.select2-results__option>*, .select2 {
+li.select2-results__option>* {
 	touch-action: none;
 }
 
