@@ -185,32 +185,35 @@
 
 
 $(document).ready(function () {
-	$('body').on('mouseenter', '.select2-results__option.non-leaf span.item-label', function (e) {
-		if (!e) return;
-		if (!e.currentTarget) return;
-		if (!e.currentTarget.parentNode) return;
-		if (!e.fromElement) return;
-		// console.log(e.currentTarget);
+	// $('body').on('mouseenter', '.select2-results__option.non-leaf span.item-label', function (e) {
+	// 	if (!e) return;
+	// 	if (!e.currentTarget) return;
+	// 	if (!e.currentTarget.parentNode) return;
+	// 	if (!e.fromElement) return;
+	// 	// console.log(e.currentTarget);
 
-		if (!e.currentTarget.parentNode.classList.contains("opened") && !e.fromElement.classList.contains("expand-collapse")) {
-			// console.log(e);
-			expColMouseupHandler(e)
-			// console.log(e.target);
+	// 	if (!e.currentTarget.parentNode.classList.contains("opened") && !e.fromElement.classList.contains("expand-collapse")) {
+	// 		// console.log(e);
+	// 		expColMouseupHandler(e)
+	// 		// console.log(e.target);
 			
-		}
+	// 	}
 
 
-	});
+	// });
 
-	document.body.addEventListener("touchmove", function (e) {
+	document.body.addEventListener("pointermove", function (e) {	
+		console.log(e);
 
-		if (!e || !e.touches[0]) return;
+		if (!e) return;
 		// console.log(e.currentTarget);
-		var ele = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
-
+		var ele = document.elementFromPoint(e.clientX, e.clientY);
+		console.log(ele);
+		
 		if (ele.classList.contains("item-label") && (
 			!ele.parentNode.classList.contains("opened")
 		)) {
+			console.log(ele);
 			
 			expColMouseupHandlerNoPrevent(ele)
 			//console.log(ele);
