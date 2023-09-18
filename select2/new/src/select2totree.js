@@ -165,20 +165,27 @@
       a.match(/^l[0-9]$/)
     ); // l1, l2, l3...
 
-    if (!levelString || levelString === "l1") return;
+    if (!levelString) return;
 
     const listRoot = target.parentNode.parentNode; // <ul> tag of the list
 
     if (!listRoot) return;
 
+
     Array.from(listRoot.children).forEach((child) => {
+
       if (
-        Array.from(child.classList).includes(levelString) &&
-        child !== target &&
-        !Array.from(child.classList).includes("opened")
+        Array.from(child.classList).includes(levelString) && // on the same level
+        !child.isEqualNode(target.parentNode) && // any li in ul !== hovered element
+        Array.from(child.classList).includes("opened") // is li opened
       ) {
-        $(child).toggleClass("opened");
-        showHideSub(child);
+        
+        console.log('trigger');
+        debounce(() => {
+          $(child).toggleClass("opened");
+          showHideSub(child);
+        }, 500)();
+
       }
     });
   }
@@ -236,3 +243,31 @@ $(document).ready(function () {
     }
   });
 });
+
+// Возвращает функцию, которая, пока она продолжает вызываться,
+// не будет запускаться.
+// Она будет вызвана один раз через N миллисекунд после последнего вызова.
+// Если передано аргумент `immediate` (true), то она запустится сразу же при
+// первом запуске функции.
+
+function debounce(func, wait, immediate) {
+  let timeout;
+
+  return function executedFunction() {
+    const context = this;
+    const args = arguments;
+
+    const later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+
+    const callNow = immediate && !timeout;
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(later, wait);
+
+    if (callNow) func.apply(context, args);
+  };
+};
