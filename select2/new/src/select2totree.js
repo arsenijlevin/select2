@@ -3,227 +3,236 @@
  * https://github.com/clivezhg/select2-to-tree
  */
 (function ($) {
+  $.fn.select2ToTree = function (options) {
+    var opts = $.extend({}, options);
 
-	$.fn.select2ToTree = function (options) {
-		var opts = $.extend({}, options);
+    if (opts.treeData) {
+      buildSelect(opts.treeData, this);
+    }
 
-		if (opts.treeData) {
-			buildSelect(opts.treeData, this);
-		}
+    opts._templateResult = opts.templateResult;
+    opts.templateResult = function (data, container) {
+      var label = data.text;
+      if (typeof opts._templateResult === "function") {
+        label = opts._templateResult(data, container);
+      }
+      var $iteme = $("<span class='item-label'></span>").append(label);
+      if (data.element) {
+        var ele = data.element;
+        container.setAttribute("data-val", ele.value);
+        if (ele.className) container.className += " " + ele.className;
+        if (ele.getAttribute("data-pup")) {
+          container.setAttribute("data-pup", ele.getAttribute("data-pup"));
+        }
+        if ($(container).hasClass("non-leaf")) {
+          return $.merge(
+            $iteme,
+            $(
+              '<span class="expand-collapse" onmouseup="expColMouseupHandler(event);"></span>'
+            )
+          );
+        }
+      }
 
-		opts._templateResult = opts.templateResult;
-		opts.templateResult = function (data, container) {
-			var label = data.text;
-			if (typeof opts._templateResult === "function") {
-				label = opts._templateResult(data, container);
-			}
-			var $iteme = $("<span class='item-label'></span>").append(label);
-			if (data.element) {
-				var ele = data.element;
-				container.setAttribute("data-val", ele.value);
-				if (ele.className) container.className += " " + ele.className;
-				if (ele.getAttribute("data-pup")) {
-					container.setAttribute("data-pup", ele.getAttribute("data-pup"));
-				}
-				if ($(container).hasClass("non-leaf")) {
-					return $.merge($iteme, $('<span class="expand-collapse" onmouseup="expColMouseupHandler(event);"></span>'));
-				}
+      return $iteme;
+    };
 
+    window.expColMouseupHandler = function (evt) {
+      // console.log(evt.target || evt.srcElement);
 
-			}
+      toggleSubOptions(evt.target || evt.srcElement);
+      /* prevent Select2 from doing "select2:selecting","select2:unselecting","select2:closing" */
+      evt.stopPropagation ? evt.stopPropagation() : (evt.cancelBubble = true);
+      evt.preventDefault ? evt.preventDefault() : (evt.returnValue = false);
+    };
 
-			return $iteme;
-		};
+    window.expColMouseupHandlerNoPrevent = function (target) {
+      // console.log(evt.target || evt.srcElement);
 
-		window.expColMouseupHandler = function (evt) {
-			// console.log(evt.target || evt.srcElement);
+      toggleSubOptions(target);
+    };
 
-			toggleSubOptions(evt.target || evt.srcElement);
-			/* prevent Select2 from doing "select2:selecting","select2:unselecting","select2:closing" */
-			evt.stopPropagation ? evt.stopPropagation() : evt.cancelBubble = true;
-			evt.preventDefault ? evt.preventDefault() : evt.returnValue = false;
-		}
+    var s2inst = this.select2(opts);
 
-		window.expColMouseupHandlerNoPrevent = function (target) {
-			// console.log(evt.target || evt.srcElement);
+    var openFunc = function (evt) {
+      var s2data = s2inst.data("select2");
+      s2data.$dropdown.addClass("s2-to-tree");
+      s2data.$dropdown.removeClass("searching-result");
 
-			toggleSubOptions(target);
-		}
+      console.log(s2data.$dropdown);
 
-		var s2inst = this.select2(opts);
+      var $allsch = s2data.$dropdown
+        .find(".select2-search__field")
+        .add(s2data.$container.find(".select2-search__field"));
+      $allsch.off("input", inputHandler);
+      $allsch.on("input", inputHandler);
+    };
 
-		var openFunc = function (evt) {
+    s2inst.on("select2:open", openFunc);
 
+    /* Show search result options even if they are collapsed */
+    function inputHandler(evt) {
+      var s2data = s2inst.data("select2");
 
-			var s2data = s2inst.data("select2");
-			s2data.$dropdown.addClass("s2-to-tree");
-			s2data.$dropdown.removeClass("searching-result");
-			var $allsch = s2data.$dropdown.find(".select2-search__field").add(s2data.$container.find(".select2-search__field"));
-			$allsch.off("input", inputHandler);
-			$allsch.on("input", inputHandler);
-		}
+      if ($(this).val().trim().length > 0) {
+        s2data.$dropdown.addClass("searching-result");
+      } else {
+        s2data.$dropdown.removeClass("searching-result");
+      }
+    }
 
-		s2inst.on("select2:open", openFunc);
+    window.inputHandler = inputHandler;
 
-		/* Show search result options even if they are collapsed */
-		function inputHandler(evt) {
+    return s2inst;
+  };
 
-			var s2data = s2inst.data("select2");
-			if ($(this).val().trim().length > 0) {
-				s2data.$dropdown.addClass("searching-result");
-			}
-			else {
-				s2data.$dropdown.removeClass("searching-result");
-			}
-		}
+  /* Build the Select Option elements */
+  function buildSelect(treeData, $el) {
+    /* Support the object path (eg: `item.label`) for 'valFld' & 'labelFld' */
+    function readPath(object, path) {
+      var currentPosition = object;
+      for (var j = 0; j < path.length; j++) {
+        var currentPath = path[j];
+        if (currentPosition[currentPath]) {
+          currentPosition = currentPosition[currentPath];
+          continue;
+        }
+        return "MISSING";
+      }
+      return currentPosition;
+    }
 
-		window.inputHandler = inputHandler;
+    function buildOptions(dataArr, curLevel, pup) {
+      var labelPath;
+      if (treeData.labelFld && treeData.labelFld.split(".").length > 1) {
+        labelPath = treeData.labelFld.split(".");
+      }
+      var idPath;
+      if (treeData.valFld && treeData.valFld.split(".").length > 1) {
+        idPath = treeData.valFld.split(".");
+      }
 
-		return s2inst;
-	};
+      for (var i = 0; i < dataArr.length; i++) {
+        var data = dataArr[i] || {};
+        var $opt = $("<option></option>");
+        if (labelPath) {
+          $opt.text(readPath(data, labelPath));
+        } else {
+          $opt.text(data[treeData.labelFld || "text"]);
+        }
+        if (idPath) {
+          $opt.val(readPath(data, idPath));
+        } else {
+          $opt.val(data[treeData.valFld || "id"]);
+        }
+        if (
+          data[treeData.selFld || "selected"] &&
+          String(data[treeData.selFld || "selected"]) === "true"
+        ) {
+          $opt.prop("selected", data[treeData.selFld || "selected"]);
+        }
+        if ($opt.val() === "") {
+          $opt.prop("disabled", true);
+          $opt.val(getUniqueValue());
+        }
+        $opt.addClass("l" + curLevel);
+        if (pup) $opt.attr("data-pup", pup);
+        $el.append($opt);
+        var inc = data[treeData.incFld || "inc"];
+        if (inc && inc.length > 0) {
+          $opt.addClass("non-leaf");
+          buildOptions(inc, curLevel + 1, $opt.val());
+        }
+      } // end 'for'
+    } // end 'buildOptions'
 
-	/* Build the Select Option elements */
-	function buildSelect(treeData, $el) {
+    buildOptions(treeData.dataArr, 1, "");
+    if (treeData.dftVal) $el.val(treeData.dftVal);
+  }
 
-		/* Support the object path (eg: `item.label`) for 'valFld' & 'labelFld' */
-		function readPath(object, path) {
-			var currentPosition = object;
-			for (var j = 0; j < path.length; j++) {
-				var currentPath = path[j];
-				if (currentPosition[currentPath]) {
-					currentPosition = currentPosition[currentPath];
-					continue;
-				}
-				return 'MISSING';
-			}
-			return currentPosition;
-		}
+  var uniqueIdx = 1;
+  function getUniqueValue() {
+    return "autoUniqueVal_" + uniqueIdx++;
+  }
 
-		function buildOptions(dataArr, curLevel, pup) {
-			var labelPath;
-			if (treeData.labelFld && treeData.labelFld.split('.').length > 1) {
-				labelPath = treeData.labelFld.split('.');
-			}
-			var idPath;
-			if (treeData.valFld && treeData.valFld.split('.').length > 1) {
-				idPath = treeData.valFld.split('.');
-			}
+  // TODO : here
 
-			for (var i = 0; i < dataArr.length; i++) {
-				var data = dataArr[i] || {};
-				var $opt = $("<option></option>");
-				if (labelPath) {
-					$opt.text(readPath(data, labelPath));
-				} else {
-					$opt.text(data[treeData.labelFld || "text"]);
-				}
-				if (idPath) {
-					$opt.val(readPath(data, idPath));
-				} else {
-					$opt.val(data[treeData.valFld || "id"]);
-				}
-				if (data[treeData.selFld || "selected"] && String(data[treeData.selFld || "selected"]) === "true") {
-					$opt.prop("selected", data[treeData.selFld || "selected"]);
-				}
-				if ($opt.val() === "") {
-					$opt.prop("disabled", true);
-					$opt.val(getUniqueValue());
-				}
-				$opt.addClass("l" + curLevel);
-				if (pup) $opt.attr("data-pup", pup);
-				$el.append($opt);
-				var inc = data[treeData.incFld || "inc"];
-				if (inc && inc.length > 0) {
-					$opt.addClass("non-leaf");
-					buildOptions(inc, curLevel + 1, $opt.val());
-				}
-			} // end 'for'
-		} // end 'buildOptions'
+  function toggleSubOptions(target) {
+    $(target.parentNode).toggleClass("opened");
+    showHideSub(target.parentNode);
 
-		buildOptions(treeData.dataArr, 1, "");
-		if (treeData.dftVal) $el.val(treeData.dftVal);
-	}
+    const levelString = Array.from(target.parentNode.classList).find((a) =>
+      a.match(/^l[0-9]$/)
+    ); // l1, l2, l3...
 
-	var uniqueIdx = 1;
-	function getUniqueValue() {
-		return "autoUniqueVal_" + uniqueIdx++;
-	}
+    if (!levelString || levelString === "l1") return;
 
-	function toggleSubOptions(target) {
-		$(target.parentNode).toggleClass("opened");
-		showHideSub(target.parentNode);
-	}
+    const listRoot = target.parentNode.parentNode; // <ul> tag of the list
 
-	function showHideSub(ele) {
-		var curEle = ele;
-		var $options = $(ele).parent(".select2-results__options");
-		var shouldShow = true;
-		do {
-			var pup = ($(curEle).attr("data-pup") || "").replace(/'/g, "\\'");
-			curEle = null;
-			if (pup) {
-				var pupEle = $options.find(".select2-results__option[data-val='" + pup + "']");
-				if (pupEle.length > 0) {
-					if (!pupEle.eq(0).hasClass("opened")) { // hide current node if any parent node is collapsed
-						$(ele).removeClass("showme");
-						shouldShow = false;
-						break;
-					}
-					curEle = pupEle[0];
-				}
-			}
-		} while (curEle);
-		if (shouldShow) $(ele).addClass("showme");
+    if (!listRoot) return;
 
-		var val = ($(ele).attr("data-val") || "").replace(/'/g, "\\'");
-		$options.find(".select2-results__option[data-pup='" + val + "']").each(function () {
-			showHideSub(this);
-		});
-	}
+    Array.from(listRoot.children).forEach((child) => {
+      if (
+        Array.from(child.classList).includes(levelString) &&
+        child !== target &&
+        !Array.from(child.classList).includes("opened")
+      ) {
+        $(child).toggleClass("opened");
+        showHideSub(child);
+      }
+    });
+  }
+
+  function showHideSub(ele) {
+    var curEle = ele;
+    var $options = $(ele).parent(".select2-results__options");
+    var shouldShow = true;
+    do {
+      var pup = ($(curEle).attr("data-pup") || "").replace(/'/g, "\\'");
+      curEle = null;
+      if (pup) {
+        var pupEle = $options.find(
+          ".select2-results__option[data-val='" + pup + "']"
+        );
+        if (pupEle.length > 0) {
+          if (!pupEle.eq(0).hasClass("opened")) {
+            // hide current node if any parent node is collapsed
+            $(ele).removeClass("showme");
+            shouldShow = false;
+            break;
+          }
+          curEle = pupEle[0];
+        }
+      }
+    } while (curEle);
+    if (shouldShow) $(ele).addClass("showme");
+
+    var val = ($(ele).attr("data-val") || "").replace(/'/g, "\\'");
+    $options
+      .find(".select2-results__option[data-pup='" + val + "']")
+      .each(function () {
+        showHideSub(this);
+      });
+  }
 })(jQuery);
 
-
-
 $(document).ready(function () {
-	// $('body').on('mouseenter', '.select2-results__option.non-leaf span.item-label', function (e) {
-	// 	if (!e) return;
-	// 	if (!e.currentTarget) return;
-	// 	if (!e.currentTarget.parentNode) return;
-	// 	if (!e.fromElement) return;
-	// 	// console.log(e.currentTarget);
+  document.body.addEventListener("pointermove", function (e) {
+    // console.log(e);
 
-	// 	if (!e.currentTarget.parentNode.classList.contains("opened") && !e.fromElement.classList.contains("expand-collapse")) {
-	// 		// console.log(e);
-	// 		expColMouseupHandler(e)
-	// 		// console.log(e.target);
-			
-	// 	}
+    if (!e) return;
+    // console.log(e.currentTarget);
+    var ele = document.elementFromPoint(e.clientX, e.clientY);
+    // console.log(ele);
 
+    if (
+      ele.classList.contains("item-label") &&
+      !ele.parentNode.classList.contains("opened")
+    ) {
+      // console.log(ele);
 
-	// });
-
-	document.body.addEventListener("pointermove", function (e) {	
-		// console.log(e);
-
-		if (!e) return;
-		// console.log(e.currentTarget);
-		var ele = document.elementFromPoint(e.clientX, e.clientY);
-		// console.log(ele);
-		
-		if (ele.classList.contains("item-label") && (
-			!ele.parentNode.classList.contains("opened")
-		)) {
-			// console.log(ele);
-			
-			expColMouseupHandlerNoPrevent(ele)
-			//console.log(ele);
-			
-		}
-
-
-
-	})
-
-		
-		
+      expColMouseupHandlerNoPrevent(ele);
+      //console.log(ele);
+    }
+  });
 });
