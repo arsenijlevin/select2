@@ -171,16 +171,16 @@
 
     if (!listRoot) return;
 
-    Array.from(listRoot.children).forEach((child) => {
-      if (
-        Array.from(child.classList).includes(levelString) &&
-        child !== target &&
-        !Array.from(child.classList).includes("opened")
-      ) {
-        $(child).toggleClass("opened");
-        showHideSub(child);
-      }
-    });
+    // Array.from(listRoot.children).forEach((child) => {
+    //   if (
+    //     Array.from(child.classList).includes(levelString) &&
+    //     child !== target &&
+    //     !Array.from(child.classList).includes("opened")
+    //   ) {
+    //     $(child).toggleClass("opened");
+    //     showHideSub(child);
+    //   }
+    // });
   }
 
   function showHideSub(ele) {
