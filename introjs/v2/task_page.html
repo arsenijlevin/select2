@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задачи</title>
+    <link rel="icon" href="/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/homework.css">
+    <link rel="stylesheet" href="/css/sticky_and_navbar.css">
+    <link rel="stylesheet" href="/css/pagination_main.css">
+    <link rel="stylesheet" href="/css/preloader_ajax.css">
+    <link rel="stylesheet" href="/css/alert.css">
+    <link rel="stylesheet" href="/css/select2.min.css">
+    <link rel="stylesheet" href="/css/select2totree.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.min.css" />
+    <style>
+      @media screen and (max-width: 600px) {
+        .introjs-tooltipbuttons {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+    
+        .introjs-button {
+          width: 150px;
+          white-space: normal;
+        }
+
+        .introjs-dontShowAgain {
+          display: flex;
+          align-items: baseline;
+        }
+
+        /* .introjs-tooltip {
+          position: fixed;
+          top: 0 !important;
+          bottom: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          margin: 40px auto !important;
+          height: fit-content;
+        } */
+      }
+    
+      @media screen and (min-width: 601px) and (max-width: 956px) {
+        .introjs-tooltip {
+          min-width: 400px;
+        }
+      }
+    
+      @media screen and (min-width: 956px) {
+        .introjs-tooltip {
+          min-width: 600px !important;
+          max-width: unset;
+        }
+      }
+    </style>
+</head>
+<body>
+
+  <div class="preloader">
+    <svg class="preloader__image" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path fill="#485fc7"
+        d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z">
+      </path>
+    </svg>
+  </div>
+
+  <header>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a href="/" class="navbar-item">
+          <img src="/img/logo.png" width="168">
+        </a>
+    
+        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-start">
+          <a href="/" class="navbar-item">
+              Главная
+          </a>
+    
+          <a href="/learn.html" class="navbar-item">
+              Решение задач
+          </a>
+    
+          <a href="/test.html" class="navbar-item">
+              Тесты
+          </a>
+
+          <a href="/blog.html" class="navbar-item">
+              Новости
+          </a>
+    
+          <a href="/calendar.html" class="navbar-item">
+              Календарь
+          </a>
+    
+                    <a class="navbar-item">
+              Онлайн доска
+          </a>
+          <a class="navbar-item">
+            Веб зазеркалье
+          </a>
+
+        </div>
+    
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a href="/enter.html" class="button is-link is-rounded">
+                <strong>Войти</strong>
+              </a>
+              <a href="/register.html" class="button is-light is-rounded">
+                Зарегестрироваться
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+</header>
+
+<section class="section">
+    <div class="container" id="task_page">
+        <h2 class="is-size-1 has-text-weight-bold has-text-left title">Задачи</h2>
+
+
+        <div class="columns homework_flex">
+            <div class="column is-4 filter_column">
+              <div class="sticky">
+                <div class="filter">
+                  <h4 class="is-size-4 has-text-weight-bold">Фильтрация</h4>
+                  <div class="mobile_filter_toggle">Показать фильтрацию</div>
+                  <div class="mobile_filter_secret">
+                    <div class="my-3">
+                      <p class="my-2">По классам:</p>
+                      <select id="class" multiple onChange="class_select()"></select>
+                      <input type="text" id="class_input" class="input_select_value">
+                    </div>
+                    <div class="my-3">
+                      <p class="my-2">По предметам:</p>
+                      <select id="subject" multiple onChange="subject_select()"></select>
+                      <input type="text" id="subject_input" class="input_select_value">
+                    </div>
+                    <div class="my-3">
+                      <p class="my-2">По подготовке:</p>
+                      <select id="exs" multiple onChange="exs_select()"></select>
+                      <input type="text" id="exs_input" class="input_select_value">
+                    </div>
+                    <div class="my-3">
+                      <p class="my-2">По авторам:</p>
+                      <select id="author" multiple onChange="author_select()"></select>
+                      <input type="text" id="author_input" class="input_select_value">
+                    </div>
+                    <button class="button is-link is-rounded py-5 is-size-6 my-4" style="width: 100%;">Применить</button>
+                  </div>
+
+                </div>
+                <div class="pages"></div>
+              </div>
+            </div>
+            <div class="column is-8 homework_row task_row" id="task_page">
+                <!-- <div class="preloader_new">
+                  <div class="preloader_new_cont">
+                    <svg class="preloader__image preloader__image__two" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                      <path fill="#485fc7"
+                        d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z">
+                      </path>
+                    </svg>
+                  </div>
+                </div> -->
+                <div class="pre_task sticky sticky_header">
+                  <div class="search">
+                    <input type="search" id="site-search" name="q" placeholder="Поиск по условию задачи">
+                    <button><img src="/img/icons/search.svg" alt=""></button>
+                  </div>
+                  <div class="favourite">
+                      <img src="/img/icons/lk/save.svg" alt="">
+                      <a href="/favourite_task_page.html">Перейти в избранные (1)</a>
+                  </div>
+                </div>
+                
+                <div class="homework_div_branch">
+                  <div class="homework_div my-4">
+                    <div class="homework_header">
+                        <p class="is-size-6"> <span class="main has-text-weight-bold">№1</span></p>
+                        <p class="rubricator_toggle main has-text-weight-bold">Информация</p>
+                        <a href="/blog.html" class="has-text-weight-bold">Теория</a>
+                        <a class="is-size-6 has-text-weight-bold delite"> Удалить из избранного</a> 
+                    </div>
+                    <div class="rubricator">
+                      <p>Экзамены с этой задачей: <a href="#!"></a></p>
+                      <p>Предмет и тема: <a href="#!">Математика</a> <a href="#!">Арифметика и начала Алгебры</a> <a href="#!">Арифметика</a></p>
+                      <p>Задача в следующих классах: <a href="#!">5 класс</a> <a href="#!">6 класс</a></p>
+                      <p>Сложность задачи: <a href="#!">2</a></p>
+                      <p>Задача встречается в следующей книге: <a href="#!">Название книги - ссылка</a></p>
+                    </div>
+                    <div class="homework_text my-4">Города A и B расположены3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333 на одном шоссе. Из этих городов одновременно в одном направлении выехали два автобуса. Первый автобус двигался со скоростью 54 км/ч, что составляет 0,6 скорости второго автобуса. Второй автобус догнал первый через 1 ч 30 мин после выезда. На каком расстоянии друг от друга были автобусы через 2 часа после выезда?</div>
+                    <div class="homework_footer">
+                        <a href="#" class="is-size-6 has-text-weight-bold content_toggle">Показать решение</a>
+                        <a class="is-size-6 has-text-weight-bold generate_a">Генерировать похожее</a>
+                        <a href="#" class="is-size-6 has-text-weight-bold js-modal-trigger" data-target="modal-js-example">Отправить на доску</a>
+                    </div>
+                    <div class="secret my-4 secret_overflow">
+                        <p>Города A и B расположены на одном шоссе. Из этих городов одновременно в одном направлении выехали два автобуса. Первый автобус двигался со скоростью 54 км/ч, что составляет 0,6 скорости второго автобуса. Второй автобус догнал первый через 1 ч 30 мин после выезда. На каком расстоянии друг от друга были автобусы через 2 часа после выезда?</p>
+                        <p class="is-size-6 has-text-weight-bold" style="margin-top: 20px; color: #485fc7;">Ответ: 70</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="homework_div my-4">
+                  <div class="homework_header">
+                    <p class="is-size-6"> <span class="main has-text-weight-bold">№2</span></p>
+                    <p class="rubricator_toggle main has-text-weight-bold">Информация</p>
+                    <a href="/blog.html" class="has-text-weight-bold">Теория</a>
+                    <a class="is-size-6 has-text-weight-bold delite"> Удалить из избранного</a> 
+                  </div>
+                  <div class="rubricator">
+                    <p>Экзамены с этой задачей: <a href="#!"></a></p>
+                    <p>Предмет и тема: <a href="#!">Математика</a> <a href="#!">Арифметика и начала Алгебры</a> <a href="#!">Арифметика</a></p>
+                    <p>Задача в следующих классах: <a href="#!">5 класс</a> <a href="#!">6 класс</a></p>
+                    <p>Сложность задачи: <a href="#!">2</a></p>
+                    <p>Задача встречается в следующей книге: <a href="#!">Название книги - ссылка</a></p>
+                  </div>
+                    <div class="homework_text my-4">Города A и B расположены на одном шоссе. Из этих городов одновременно в одном направлении выехали два автобуса. Первый автобус двигался со скоростью 54 км/ч, что составляет 0,6 скорости второго автобуса. Второй автобус догнал первый через 1 ч 30 мин после выезда. На каком расстоянии друг от друга были автобусы через 2 часа после выезда?</div>
+                    <div class="homework_footer">
+                        <a href="#" class="is-size-6 has-text-weight-bold content_toggle">Показать решение</a>
+                        <a class="is-size-6 has-text-weight-bold generate_a">Генерировать похожее</a>
+                        <a href="#" class="is-size-6 has-text-weight-bold js-modal-trigger" data-target="modal-js-example">Отправить на доску</a>
+                    </div>
+                    <div class="secret my-4 secret_overflow">
+                        <p>Города A и B расположены на одном шоссе. Из этих городов одновременно в одном направлении выехали два автобуса. Первый автобус двигался со скоростью 54 км/ч, что составляет 0,6 скорости второго автобуса. Второй автобус догнал первый через 1 ч 30 мин после выезда. На каком расстоянии друг от друга были автобусы через 2 часа после выезда?</p>
+                        <p class="is-size-6 has-text-weight-bold" style="margin-top: 20px; color: #485fc7;">Ответ: 70</a>
+                    </div>
+                </div>
+                <div class="homework_div my-4">
+                  <div class="homework_header">
+                    <p class="is-size-6"> <span class="main has-text-weight-bold">№3</span></p>
+                    <p class="rubricator_toggle main has-text-weight-bold">Информация</p>
+                    <a href="/blog.html" class="has-text-weight-bold">Теория</a>
+                    <a class="is-size-6 has-text-weight-bold delite"> Удалить из избранного</a> 
+                  </div>
+                  <div class="rubricator">
+                    <p>Экзамены с этой задачей: <a href="#!"></a></p>
+                    <p>Предмет и тема: <a href="#!">Математика</a> <a href="#!">Арифметика и начала Алгебры</a> <a href="#!">Арифметика</a></p>
+                    <p>Задача в следующих классах: <a href="#!">5 класс</a> <a href="#!">6 класс</a></p>
+                    <p>Сложность задачи: <a href="#!">2</a></p>
+                    <p>Задача встречается в следующей книге: <a href="#!">Название книги - ссылка</a></p>
+                  </div>
+                    <div class="homework_text my-4">Города A и B расположены на одном шоссе. Из этих городов одновременно в одном направлении выехали два автобуса. Первый автобус двигался со скоростью 54 км/ч, что составляет 0,6 скорости второго автобуса. Второй автобус догнал первый через 1 ч 30 мин после выезда. На каком расстоянии друг от друга были автобусы через 2 часа после выезда?</div>
+                    <div class="homework_footer">
+                        <a href="#" class="is-size-6 has-text-weight-bold content_toggle">Показать решение</a>
+                        <a class="is-size-6 has-text-weight-bold generate_a">Генерировать похожее</a>
+                        <a href="#" class="is-size-6 has-text-weight-bold js-modal-trigger" data-target="modal-js-example">Отправить на доску</a>
+                    </div>
+                    <div class="secret my-4 secret_overflow">
+                        <p>Города A и B расположены на одном шоссе. Из этих городов одновременно в одном направлении выехали два автобуса. Первый автобус двигался со скоростью 54 км/ч, что составляет 0,6 скорости второго автобуса. Второй автобус догнал первый через 1 ч 30 мин после выезда. На каком расстоянии друг от друга были автобусы через 2 часа после выезда?</p>
+                        <p class="is-size-6 has-text-weight-bold" style="margin-top: 20px; color: #485fc7;">Ответ: 70</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+    
+    
+<footer class="footer mt-6">
+  <div class="container">
+    <div class="columns is-align-items-flex-start">
+      <div class="column is-3">
+        <figure class="image  mb-4">
+          <a href="/">
+            <img src="/img/logo.png" alt="" style="width: 168px; height: 55px;">
+          </a>
+        </figure>
+        <p class="is-size-6 mb-4">ИП Кузовкин Владимир  Валерьевич</p>
+        <a href="/politic.html"> <p class="is-size-6">Политика конфиденциальности</p></a>
+      </div>
+      <div class="column is-2" id="pk">
+        <h3 class="is-size-5 has-text-weight-bold mb-4" style="height: 55px;">Страницы</h3>
+        <a href="#"><p class="is-size-6 mb-4">Главная</p></a>
+        <a href="#"><p class="is-size-6 mb-4">Календарь</p></a>
+        <a href="#"><p class="is-size-6 mb-4">Блог</p></a>
+      </div>
+      <div class="column is-2" id="pk">
+        <h3 class="is-size-5 has-text-weight-bold mb-4" style="height: 55px;">Подготовка</h3>
+        <a href="#"><p class="is-size-6 mb-4">Тесты</p></a>
+        <a href="#"><p class="is-size-6 mb-4">Решение задач</p></a>
+        <a href="#"><p class="is-size-6 mb-4">Онлайн доска</p></a>
+      </div>
+      <div class="column is-3" id="pk">
+        <h3 class="is-size-5 has-text-weight-bold mb-4" style="height: 55px;"><a href="/index_landing.html" class="is-size-5 has-text-weight-bold mb-4" style="height: 55px; color: #4a4a4a;">Веб зазеркалье</a></h3>
+        <a href="/index_faq.html"><p class="is-size-6 mb-4">Частые вопросы</p></a>
+        <a href="/video.html"><p class="is-size-6 mb-4">Начать звонок</p></a>
+      </div>
+      <div class="column is-2" id="pk">
+        <h3 class="is-size-5 has-text-weight-bold mb-4" style="height: 55px;">Есть вопросы?</h3>
+        <button class="button callback is-medium is-rounded is-link px-5 py-5 is-size-6">Связаться с нами</button>
+      </div>
+    </div>
+    <div class="pre-footer">
+      <span class="line"></span>
+      <div class="columns mt-5">
+        <div class="column is-size-6">
+          <p>2022 @ Все права защищены</p>
+        </div>
+        <div class="column is-size-6">
+          <div class="pre-footer_flex">
+            <img class="mr-4" src="/img/icons/vk.svg" alt="">
+            <img class="mr-4" src="/img/icons/dzen.svg" alt="">
+            <img src="/img/icons/mail.svg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<div id="modal-js-example" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="box">
+        <h3 class="is-size-3 has-text-weight-bold has-text-centered mb-6 title">Отправить задачу на доску</h3>
+        <p class="has-text-left">Выберите доску из списка</p>
+        <input class="input is-rounded py-5 mt-3 mb-4" type="text" id="desk" placeholder="Выберете доску из списка">
+        <button class="button is-rounded is-link px-6 py-5 is-size-6 mt-6 register_btn register_btn modal-close modal-close-custom trigger_alert_send_desk" style="width: 100%;">Отправить работу</button>
+      <!-- Your content -->
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+
+<div class="alert_custom_bg">
+  <div class="alert_custom">
+    <p>Задача отправлена на доску</p>
+    <button class="alert_custom_close button is-rounded is-link px-6 py-5 is-size-6">Отлично!</button>
+  </div>
+</div>
+
+<script src="/js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/filter.js"></script>
+<script src="/js/select_value.js"></script>
+<script src="/js/generate.js"></script>
+<script src="/js/pagination.min.js"></script>
+<script src="/js/pagination_main.js"></script>
+<script src="/js/comboTreePlugin.js"></script>
+<script src="/js/select2.min.js"></script>
+<script src="/js/select2totree.js"></script>
+<script src="/js/show.js"></script>
+<script src="/js/alert.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js"></script>
+<script src="/js/task_page.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+.paginationjs-pages ul {
+    display: flex;
+    flex-direction: row;
+  }
+  .paginationjs-pages ul li:not(:last-child) {
+    margin-right: 10px;
+  }   
+  
+  .paginationjs{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .paginationjs-size-changer select{
+    color: #485fc7;
+    width: 100%;
+    font-size: 16px;
+    border: 1px solid #485fc7;
+    border-radius: 5px;
+    padding: 7px 10px;
+  }
+  .J-paginationjs-go-button:hover{
+    background: #fff;
+    color: #485fc7;
+  }
+  .paginationjs-pages .active{
+    background-color: #485fc7;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .paginationjs-pages ul li{
+    background-color: transparent;
+    border-radius: 50%;
+    border: 1px solid #c2c2c2;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .paginationjs-prev, .paginationjs-next{
+    border: 0px !important;
+    width: 15px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+  }
+  .paginationjs-pages .active a{
+    color: #fff;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .paginationjs-pages ul li a{
+    color: #000;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .pages span, .pages a {
+    font-size: 17px;
+  }
+  .paginationjs-pages ul, .paginationjs-size-changer select{
+    margin-bottom: 15px;
+  }
+  .mobile_pagination_991{
+    display: none;
+  }
+
+  @media (max-width:1220px){
+    .paginationjs-size-changer select{
+        font-size: 14px;
+        padding: 5px 7px;
+      }
+  }
+
+  @media (max-width: 991px){
+    .mobile_pagination_991{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
