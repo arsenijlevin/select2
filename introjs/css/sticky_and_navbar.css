@@ -1,0 +1,95 @@
+.sticky{
+    position: -webkit-sticky; /* Safari */  
+    position: sticky;
+    top: 0;
+}
+.sticky_header{
+    z-index: 9;
+    background: #fff;
+    padding: 10px 0px;
+}
+.save_div .sticky{
+    z-index: 9;
+    background: #fff;
+    padding: 10px 0px;
+}
+.fixed_sticky{
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    padding-right: 10px;
+}
+.fixed_menu{
+    position: fixed;
+    z-index: 2;
+    background: #fff;
+    width: 100%;
+    max-width: 660px;
+}
+.pre_task{
+    z-index: 999;
+}
+.filter{
+    margin-top: 0;
+}
+.buttons .button{
+    display: inline-flex;
+    width: auto;
+}
+
+@media (max-width: 1400px){
+    .fixed_menu{
+        max-width: 565px;
+    }
+}
+@media (max-width: 1216px){
+    .fixed_menu{
+        max-width: 465px;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .container {
+        max-width: auto;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-brand, .navbar-menu.is-active{
+        width: 100%;
+    }
+    .navbar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        padding: 0px 20px;
+        z-index: 9999;
+    }
+    .navbar-menu.is-active {
+        display: block;
+        position: fixed;
+        top: 56px;
+        left: 0;
+        padding: 20px;
+        box-shadow: 0 8px 16px rgb(10 10 10 / 0%);
+        height: 100vh;
+    }
+    .navbar-menu.is-active .buttons{
+        margin-top: 10px;
+    }
+    .navbar-item img{
+        height: 40px;
+        width: auto;
+    }
+    section{
+        padding-top: 100px !important;
+    }
+    .sticky_pc{
+        display: none;
+    }
+    .sticky_header{
+        position: relative;
+    }
+}

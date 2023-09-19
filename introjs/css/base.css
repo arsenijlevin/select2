@@ -1,7 +1,7 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 @import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 
-/*стили для фильтров*/
+/*СЃС‚РёР»Рё РґР»СЏ С„РёР»СЊС‚СЂРѕРІ*/
 :root {
   --ct-bg: #fff;
   --ct-btn-hover: #e8e8e8;
@@ -123,7 +123,7 @@ border-left: none;
 border-right: none;
 border-bottom: 1px solid var(--ct-border-color);
 }
-/*основные стили*/
+/*РѕСЃРЅРѕРІРЅС‹Рµ СЃС‚РёР»Рё*/
 *{
     padding: 0;
     margin: 0;
@@ -145,7 +145,7 @@ body{
     right: 0;
     bottom: 0;
     overflow: hidden;
-    /* фоновый цвет */
+    /* С„РѕРЅРѕРІС‹Р№ С†РІРµС‚ */
     background: #E5E5E5;
     z-index: 1001;
     width: 100%;
@@ -495,15 +495,15 @@ thead tr th{
   color: #000;
 }
 .content_overflow::-webkit-scrollbar {
-  width: 12px;               /* ширина scrollbar */
+  width: 12px;               /* С€РёСЂРёРЅР° scrollbar */
 }
 .content_overflow::-webkit-scrollbar-track {
-  background: #f5f9ff;        /* цвет дорожки */
+  background: #f5f9ff;        /* С†РІРµС‚ РґРѕСЂРѕР¶РєРё */
 }
 .content_overflow::-webkit-scrollbar-thumb {
-  background-color: #485fc7;    /* цвет плашки */
-  border-radius: 20px;       /* закругления плашки */
-  border: 3px solid #f5f9ff;  /* padding вокруг плашки */
+  background-color: #485fc7;    /* С†РІРµС‚ РїР»Р°С€РєРё */
+  border-radius: 20px;       /* Р·Р°РєСЂСѓРіР»РµРЅРёСЏ РїР»Р°С€РєРё */
+  border: 3px solid #f5f9ff;  /* padding РІРѕРєСЂСѓРі РїР»Р°С€РєРё */
 }
 .inp_radio{
   margin-right: 30px;
@@ -511,21 +511,21 @@ thead tr th{
 .inp_radio input{
   margin-right: 10px;
 }
-  /* для элемента input c type="radio" */
+  /* РґР»СЏ СЌР»РµРјРµРЅС‚Р° input c type="radio" */
   .custom-radio {
     position: absolute;
     z-index: -1;
     opacity: 0;
     cursor: pointer;
   }
-  /* для элемента label связанного с .custom-radio */
+  /* РґР»СЏ СЌР»РµРјРµРЅС‚Р° label СЃРІСЏР·Р°РЅРЅРѕРіРѕ СЃ .custom-radio */
   .custom-radio+label {
     display: inline-flex;
     align-items: center;
     user-select: none;
     cursor: pointer;
   }
-  /* создание в label псевдоэлемента  before со следующими стилями */
+  /* СЃРѕР·РґР°РЅРёРµ РІ label РїСЃРµРІРґРѕСЌР»РµРјРµРЅС‚Р°  before СЃРѕ СЃР»РµРґСѓСЋС‰РёРјРё СЃС‚РёР»СЏРјРё */
   .custom-radio+label::before {
     content: '';
     display: inline-block;
@@ -541,15 +541,15 @@ thead tr th{
     background-size: 50% 50%;
     cursor: pointer;
   }
-  /* стили при наведении курсора на радио */
+  /* СЃС‚РёР»Рё РїСЂРё РЅР°РІРµРґРµРЅРёРё РєСѓСЂСЃРѕСЂР° РЅР° СЂР°РґРёРѕ */
   .custom-radio:not(:disabled):not(:checked)+label:hover::before {
     border-color: #b3d7ff;
   }
-  /* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
+  /* СЃС‚РёР»Рё РґР»СЏ СЂР°РґРёРѕРєРЅРѕРїРєРё, РЅР°С…РѕРґСЏС‰РµР№СЃСЏ РІ С„РѕРєСѓСЃРµ Рё РЅРµ РЅР°С…РѕРґСЏС‰РµР№СЃСЏ РІ СЃРѕСЃС‚РѕСЏРЅРёРё checked */
   .custom-radio:focus:not(:checked)+label::before {
     border-color: #80bdff;
   }
-  /* стили для радиокнопки, находящейся в состоянии checked */
+  /* СЃС‚РёР»Рё РґР»СЏ СЂР°РґРёРѕРєРЅРѕРїРєРё, РЅР°С…РѕРґСЏС‰РµР№СЃСЏ РІ СЃРѕСЃС‚РѕСЏРЅРёРё checked */
   .custom-radio:checked+label::before {
     border-color: #0b76ef;
     background-color: #0b76ef;
@@ -746,6 +746,7 @@ thead tr th{
 }
 .homework_text{
   overflow-x: auto;
+  overflow-y: hidden;
 }
 .column_save{
   position: relative;
@@ -756,14 +757,14 @@ thead tr th{
   text-align: left;
 }
 
-/* полоса прокрутки (скроллбар) */
+/* РїРѕР»РѕСЃР° РїСЂРѕРєСЂСѓС‚РєРё (СЃРєСЂРѕР»Р»Р±Р°СЂ) */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
   background-color: #efefef;
 }
 
-/* ползунок скроллбара */
+/* РїРѕР»Р·СѓРЅРѕРє СЃРєСЂРѕР»Р»Р±Р°СЂР° */
 ::-webkit-scrollbar-thumb {
   background-color: #485fc7;
   border-radius: 9em;
@@ -829,7 +830,7 @@ thead tr th{
   display: flex;
   align-items: start;
   justify-content: space-between;
-  width: 48%;
+  /*width: 48%;*/
   position: relative;
   margin-top: 10px;
 }
@@ -937,9 +938,9 @@ output{
   background: #f5f9ff;
 }
 .secret_overflow::-webkit-scrollbar-thumb {
-  background-color: #485fc7;    /* цвет плашки */
-  border-radius: 20px;       /* закругления плашки */
-  border: 3px solid #485fc7;   /* padding вокруг плашки */
+  background-color: #485fc7;    /* С†РІРµС‚ РїР»Р°С€РєРё */
+  border-radius: 20px;       /* Р·Р°РєСЂСѓРіР»РµРЅРёСЏ РїР»Р°С€РєРё */
+  border: 3px solid #485fc7;   /* padding РІРѕРєСЂСѓРі РїР»Р°С€РєРё */
 }
 .save_div_btn_flex{
   display: flex;

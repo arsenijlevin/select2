@@ -18,39 +18,37 @@
     <link rel="stylesheet" href="/css/select2totree.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.min.css" />
     <style>
-      @media screen and (max-width: 956px) {
-        .tourTooltip {
-          min-width: 600px;
-        }
+    @media screen and (max-width: 600px) {
+      .introjs-tooltipbuttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
-      /* Size > Small */
-      @media screen and (min-width: 956px) {
-        .tourTooltip {
-          min-width: 600px;
-        }
+
+      .introjs-button {
+        width: 150px;
+        white-space: normal;
       }
-  
-      @media screen and (max-width: 1256px) {
-        .tourTooltip_2 {
-          min-width: 900px;
-        }
+
+      .introjs-tooltip {
+        margin: 25px;
       }
-      /* Size > Small */
-      @media screen and (min-width: 1256px) {
-        .tourTooltip_2 {
-          min-width: 900px;
-        }
-      }
-      @media (max-width: 500px) { 
-      .introjs-helperNumberLayer{
-          left: 0px!important;
-          top: -10px!important;
-      }
-      .introjs-tooltip{
-          margin-top: 40px!important;
+
+    }
+
+    @media screen and (min-width: 601px) and (max-width: 956px) {
+      .introjs-tooltip {
+        min-width: 400px;
       }
     }
-          </style>
+
+    @media screen and (min-width: 956px) {
+      .introjs-tooltip {
+        min-width: 600px !important;
+        max-width: unset;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -356,7 +354,7 @@
 <script src="/js/show.js"></script>
 <script src="/js/alert.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js"></script>
-
+<script src="/js/task_page.js"></script>
 
 </body>
 </html>
