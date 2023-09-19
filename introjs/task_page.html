@@ -18,37 +18,47 @@
     <link rel="stylesheet" href="/css/select2totree.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.min.css" />
     <style>
-    @media screen and (max-width: 600px) {
-      .introjs-tooltipbuttons {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
+      @media screen and (max-width: 600px) {
+        .introjs-tooltipbuttons {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+    
+        .introjs-button {
+          width: 150px;
+          white-space: normal;
+        }
 
-      .introjs-button {
-        width: 150px;
-        white-space: normal;
-      }
+        .introjs-dontShowAgain {
+          display: flex;
+          align-items: baseline;
+        }
 
-      .introjs-tooltip {
-        margin: 25px;
+        .introjs-tooltip {
+          position: fixed;
+          top: 0 !important;
+          bottom: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          margin: 40px auto !important;
+          height: fit-content;
+        }
       }
-
-    }
-
-    @media screen and (min-width: 601px) and (max-width: 956px) {
-      .introjs-tooltip {
-        min-width: 400px;
+    
+      @media screen and (min-width: 601px) and (max-width: 956px) {
+        .introjs-tooltip {
+          min-width: 400px;
+        }
       }
-    }
-
-    @media screen and (min-width: 956px) {
-      .introjs-tooltip {
-        min-width: 600px !important;
-        max-width: unset;
+    
+      @media screen and (min-width: 956px) {
+        .introjs-tooltip {
+          min-width: 600px !important;
+          max-width: unset;
+        }
       }
-    }
-  </style>
+    </style>
 </head>
 <body>
 

@@ -84,7 +84,6 @@ var searchCustomAdapter = function (SelectAdapter) {
         var ele = data.element;
         var s2data = s2inst.data("select2");
         const isSearching = Array.from(s2data.$dropdown[0].classList).includes("searching-result");
-        console.log(s2data);
 
         container.setAttribute("data-val", ele.value);
         if (ele.className) container.className += " " + ele.className;
@@ -124,8 +123,6 @@ var searchCustomAdapter = function (SelectAdapter) {
     var s2inst = this.select2(opts);
 
     var openFunc = function (evt) {
-      console.log('opened');
-
       var s2data = s2inst.data("select2");
       s2data.$dropdown.addClass("s2-to-tree");
       s2data.$dropdown.removeClass("searching-result");
@@ -146,12 +143,8 @@ var searchCustomAdapter = function (SelectAdapter) {
      */
 
     function inputHandler(evt) {
-      console.log('inputHandler');
-
       var s2data = s2inst.data("select2");
       const searchInputStringLength = $(this).val().trim().length;
-      console.log(s2inst.data("select2"));
-
 
       if (searchInputStringLength > 0) {
         s2data.$dropdown.addClass("searching-result");
@@ -258,12 +251,9 @@ var searchCustomAdapter = function (SelectAdapter) {
         !child.isEqualNode(target.parentNode) && // any li in ul !== hovered element
         Array.from(child.classList).includes("opened") // is li opened
       ) {
-        
-        console.log('trigger');
-        debounce(() => {
-          $(child).toggleClass("opened");
-          showHideSub(child);
-        }, 500)();
+
+        $(child).toggleClass("opened");
+        showHideSub(child);
 
       }
     });
@@ -336,7 +326,7 @@ function debounce(func, wait, immediate) {
     const context = this;
     const args = arguments;
 
-    const later = function() {
+    const later = function () {
       timeout = null;
       if (!immediate) func.apply(context, args);
     };
