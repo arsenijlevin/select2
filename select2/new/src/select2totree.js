@@ -2,28 +2,97 @@
  * Select2-to-Tree 1.1.1
  * https://github.com/clivezhg/select2-to-tree
  */
+var searchCustomAdapter = function (SelectAdapter) {
+  SelectAdapter.prototype.query = function (params, callback) {
+    var data = []
+    var self = this
+    var added = []
+
+    var $options = this.$element.children()
+
+    function checkParent($option) {
+      var pup = $option.data('pup')
+
+      if (pup) {
+        var $parent = self.$element.find('[value="' + pup + '"]')
+        var poption = self.item($parent)
+
+        if (!added.includes($parent.val())) {
+          if ($parent.data('pup')) {
+            checkParent($parent)
+          }
+
+          data.push(poption)
+          added.push($parent.val())
+        }
+      }
+    }
+
+    $options.each(function () {
+      if (this.tagName.toLowerCase() !== 'option' && this.tagName.toLowerCase() !== 'optgroup') {
+        return
+      }
+
+      var $option = $(this)
+
+      var option = self.item($option)
+
+      var matches = self.matches(params, option)
+
+      if (matches !== null) {
+        if (!added.includes($option.val())) {
+          checkParent($option)
+
+          data.push(matches)
+          added.push($option.val())
+        }
+      }
+    })
+
+    callback({
+      results: data,
+    })
+  }
+};
+
 (function ($) {
   $.fn.select2ToTree = function (options) {
     var opts = $.extend({}, options);
 
+    // Adapter allows to see all hierarchy on search
+    function setupCustomAdapter() {
+      $.fn.select2.amd.define('CustomSelectAdapter', ['select2/data/select'], searchCustomAdapter)
+      opts.selectAdapter = $.fn.select2.amd.require('CustomSelectAdapter');
+    }
+
     if (opts.treeData) {
+      setupCustomAdapter();
       buildSelect(opts.treeData, this);
     }
 
     opts._templateResult = opts.templateResult;
+
+    // Shows resulted items in ul
     opts.templateResult = function (data, container) {
       var label = data.text;
+
       if (typeof opts._templateResult === "function") {
         label = opts._templateResult(data, container);
       }
       var $iteme = $("<span class='item-label'></span>").append(label);
       if (data.element) {
         var ele = data.element;
+        var s2data = s2inst.data("select2");
+        const isSearching = Array.from(s2data.$dropdown[0].classList).includes("searching-result");
+        console.log(s2data);
+
         container.setAttribute("data-val", ele.value);
         if (ele.className) container.className += " " + ele.className;
+        if (isSearching) container.className += " " + "opened";
         if (ele.getAttribute("data-pup")) {
           container.setAttribute("data-pup", ele.getAttribute("data-pup"));
         }
+
         if ($(container).hasClass("non-leaf")) {
           return $.merge(
             $iteme,
@@ -55,11 +124,12 @@
     var s2inst = this.select2(opts);
 
     var openFunc = function (evt) {
+      console.log('opened');
+
       var s2data = s2inst.data("select2");
       s2data.$dropdown.addClass("s2-to-tree");
       s2data.$dropdown.removeClass("searching-result");
 
-      console.log(s2data.$dropdown);
 
       var $allsch = s2data.$dropdown
         .find(".select2-search__field")
@@ -70,11 +140,20 @@
 
     s2inst.on("select2:open", openFunc);
 
-    /* Show search result options even if they are collapsed */
-    function inputHandler(evt) {
-      var s2data = s2inst.data("select2");
+    /**
+     * Show search result options even if they are collapsed
+     * On key input in search event
+     */
 
-      if ($(this).val().trim().length > 0) {
+    function inputHandler(evt) {
+      console.log('inputHandler');
+
+      var s2data = s2inst.data("select2");
+      const searchInputStringLength = $(this).val().trim().length;
+      console.log(s2inst.data("select2"));
+
+
+      if (searchInputStringLength > 0) {
         s2data.$dropdown.addClass("searching-result");
       } else {
         s2data.$dropdown.removeClass("searching-result");
