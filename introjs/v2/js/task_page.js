@@ -1,9 +1,27 @@
+const allowTouchmove = (event) => {
+  event.stopPropagation()
+}
+
 const tour = new Shepherd.Tour({
   defaultStepOptions: {
     cancelIcon: {
       enabled: true
     },
     scrollTo: { behavior: 'smooth', block: 'center' },
+    when: {
+      show() {
+        const target = this.getTarget()
+        if (target) {
+          target.addEventListener('touchmove', allowTouchmove)
+        }
+      },
+      hide() {
+        const target = this.getTarget()
+        if (target) {
+          target.removeEventListener('touchmove', allowTouchmove)
+        }
+      }
+    }
   },
   useModalOverlay: true
 });
@@ -248,3 +266,5 @@ if (doNotShowCheck === "false" || !doNotShowCheck) {
 document.querySelector(".shepherd-modal-overlay-container")?.addEventListener("click", () => {
   tour.cancel()
 })
+
+document.body.addEventListener('touchmove', event => event.stopPropagation())
