@@ -1,0 +1,103 @@
+.shepherd-content * {
+  font-family: "Helvetica Neue", Inter, ui-sans-serif, "Apple Color Emoji",
+    Helv etica, Arial, sans-serif;
+
+  color: #4a4a4a;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.shepherd-element {
+  max-width: 600px;
+}
+
+.shepherd-has-title .shepherd-content .shepherd-header {
+  background-color: #fff;
+  padding: 10px 20px 0 20px;
+  line-height: 1;
+}
+
+.shepherd-footer {
+  flex-wrap: wrap;
+  flex-direction: row;
+  border-top: 1px solid #e0e0e0;
+  white-space: nowrap;
+  column-gap: 150px;
+}
+
+.shepherd-cancel-icon span {
+  font-size: 22px;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.shepherd-text {
+  padding: 20px;
+}
+
+.shepherd-button {
+  margin-right: 0;
+}
+
+.shepherd-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0rem;
+  margin-top: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #bdbdbd;
+  padding: 0.5rem 1rem;
+  text-shadow: 1px 1px 0 #fff;
+  font-size: 14px;
+  color: #424242;
+  cursor: pointer;
+  border-radius: 0.2em;
+}
+
+.shepherd-button:not(:disabled):hover {
+  outline: 0;
+  text-decoration: none;
+  border-color: #9e9e9e;
+  background-color: #e0e0e0;
+  color: #212121;
+}
+.shepherd-button:focus {
+  outline: 0;
+  text-decoration: none;
+  background-color: #eee;
+  box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.5);
+  border: 1px solid #616161;
+  color: #212121;
+}
+.shepherd-button:active {
+  outline: 0;
+  text-decoration: none;
+  background-color: #e0e0e0;
+  border-color: #9e9e9e;
+  color: #212121;
+}
+
+.shepherd-button:disabled {
+  color: #9e9e9e;
+  border-color: #bdbdbd;
+  box-shadow: none;
+  cursor: default;
+  background-color: #f4f4f4;
+  background-image: none;
+  text-decoration: none;
+}
+
+.shepherd-title {
+  font-size: 18px;
+  width: 90%;
+  min-height: 1.5em;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  line-height: 1.5;
+}
