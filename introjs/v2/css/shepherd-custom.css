@@ -108,13 +108,8 @@
 }
 
 .shepherd-modal-overlay-container.shepherd-modal-is-visible {
-  height: 100dvh;
-  height: 100vh;
-  /* height: 100000px; */
-
-  width: 100dvw;
-  width: 100vw;
-  /* width: 100000px; */
+  height: 100000px;
+  width: 100000px;
 }
 
 .shepherd-text img {
@@ -183,7 +178,8 @@
   cursor: pointer;
 }
 
-.shepherd-bullets-item:hover, .shepherd-bullets-current {
+.shepherd-bullets-item:hover,
+.shepherd-bullets-current {
   width: 15px;
   background-color: #999;
 }
