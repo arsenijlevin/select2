@@ -57,6 +57,7 @@
   color: #424242;
   cursor: pointer;
   border-radius: 0.2em;
+  white-space: break-spaces;
 }
 
 .shepherd-button:not(:disabled):hover {
@@ -100,4 +101,97 @@
   padding: 0;
   font-weight: 700;
   line-height: 1.5;
+}
+
+.highlight-element-box {
+  border-radius: 4px;
+}
+
+.shepherd-modal-overlay-container.shepherd-modal-is-visible {
+  width: 1000%;
+  height: 1000%;
+}
+
+.shepherd-text img {
+  min-width: min(50vh, 50vw);
+  max-width: 100%;
+  height: auto;
+}
+
+.shepherd-modal-overlay-container {
+  cursor: pointer;
+}
+
+.shepherd-progress {
+  overflow: hidden;
+  height: 10px;
+  margin: 10px;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+}
+
+.shepherd-progressbar {
+  float: left;
+  width: 0%;
+  height: 100%;
+  font-size: 10px;
+  line-height: 10px;
+  text-align: center;
+  background-color: #08c;
+}
+
+.shepherd-dontShowAgain {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.shepherd-dontShowAgain label {
+  display: flex;
+  align-items: baseline;
+}
+
+.shepherd-dontShowAgain span {
+  display: flex;
+  align-items: baseline;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.shepherd-dontShowAgain input {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 2px;
+  display: inline;
+  width: 10px;
+  height: 10px;
+}
+
+.shepherd-bullets-item {
+  transition: width 0.1s ease-in;
+  box-sizing: content-box;
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #ccc;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.shepherd-bullets-item:hover, .shepherd-bullets-current {
+  width: 15px;
+  background-color: #999;
+}
+
+.shepherd-bullets ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5px;
+}
+
+.shepherd-bullets {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 15px;
 }
