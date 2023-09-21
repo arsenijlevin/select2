@@ -107,10 +107,10 @@
   border-radius: 4px;
 }
 
-.shepherd-modal-overlay-container.shepherd-modal-is-visible {
+/* .shepherd-modal-overlay-container.shepherd-modal-is-visible {
   width: 1000%;
   height: 1000%;
-}
+} */
 
 .shepherd-text img {
   min-width: min(50vh, 50vw);

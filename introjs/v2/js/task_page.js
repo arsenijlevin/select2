@@ -242,6 +242,22 @@ const stepsAfterProcessing = steps.map(step => {
       doNotShowAgainBlock()
       selectStepBullets()
       progressBar()
+
+    //   if (step.attachTo && step.attachTo.element) {
+    //     console.log(document.querySelector(step.attachTo.element).style);
+        
+    //     document.querySelector(step.attachTo.element).style.boxShadow = `0 0 0 99999px rgba(0, 0, 0, .5)`;
+    //     document.querySelector(step.attachTo.element).style.zIndex = `999999999999`;
+    //   }
+      
+    // },
+    // hide() {
+    //   if (step.attachTo && step.attachTo.element) {
+    //     console.log(document.querySelector(step.attachTo.element).style);
+        
+    //     document.querySelector(step.attachTo.element).style.boxShadow = ``;
+    //     document.querySelector(step.attachTo.element).style.zIndex = ``;
+    //   }
     }
   }
 
