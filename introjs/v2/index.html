@@ -115,18 +115,23 @@
     }
 
     @media screen and (min-width: 320px) and (orientation:landscape) {
-      @media screen and (min-width: 700px) {
-        .introjs-tooltipbuttons a {
-          white-space: pre-line;
-          display: inline-flex;
-          align-items: center;
-        }
-
-        .introjs-tooltiptext {
-          min-width: 350px;
-          max-width: max-content;
+      @media screen and (max-height: 320px) {
+        .introjs-tooltip {
+          margin-top: -20px !important;
         }
       }
+
+      .introjs-tooltipbuttons a {
+        white-space: pre-line;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .introjs-tooltiptext {
+        min-width: 350px !important;
+        max-width: max-content !important;
+      }
+
 
       .introjs-tooltip {
         height: fit-content;
